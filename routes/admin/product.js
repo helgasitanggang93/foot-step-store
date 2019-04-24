@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product, Transaction, User, TransactionProduct} = require('../models')
+const {Product, Transaction, User, TransactionProduct} = require('../../models')
 
 router.get('/:id', function (req, res) {
         Transaction.findAll({

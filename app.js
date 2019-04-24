@@ -1,13 +1,30 @@
 const express = require('express')
 const app = express()
-const port = 4000
-const productRouter = require('./routes/product')
+const PORT = 5000
 const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({extended:true}))
+const session = require('express-session') 
+
+const isLogin = require('./middlewares/isLogin')
+const isAdmin = require('./middlewares/isAdmin')
+let sess = { secret:'mySecret'}
+
+app.use(session(sess))
+app.use((req,res,next)=>{
+    app.locals.session = req.session
+    next()
+})
+
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.set('view engine','ejs')
-app.use('/product', productRouter)
-app.listen(port, function () {
-    console.log(`Listening port ${port}`)
-    
+app.use(express.static(__dirname + '/public')); 
+
+app.use('/', require('./routes/customer/index'))
+app.use('/login', require('./routes/customer/login'))
+app.use('/logout', require('./routes/customer/logout'))
+app.use('/signup', require('./routes/customer/signup'))
+app.use('/add_product', isLogin, require('./routes/admin/add_product'))
+app.use('/admin', isLogin, require('./routes/admin/admin'))
+
+app.listen(PORT, ()=>{
+    console.log(`server running on port ${PORT}...`)
 })
