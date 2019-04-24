@@ -23,12 +23,9 @@ Router.post('/', (req, res)=>{
                 if (success){
                     req.session.loginStatus = true
                     req.session.userName = req.body.email
-                    req.session.role = users.role
-                    console.log(users[0].admin, users.admin)
-                    
-                    if (users.role === 'admin'){
+                    req.session.role = users[0].dataValues.role                    
+                    if (req.session.role === 'admin'){
                         res.redirect('/admin')
-                        console.log(`admin`)                
                     }else{
                         console.log(`masuk`)
                         res.redirect('/')                
