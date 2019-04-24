@@ -8,6 +8,7 @@ Router.get('/', (req, res)=>{
 Router.post('/', (req, res)=>{
     let input = req.body
     if (input.psw === input.pswrepeat){
+        // console.log(input.psw ,'===', input.pswrepeat)
         Model.User.cekEmail(input.email)
         .then((isUnique)=>{
             if (isUnique){
@@ -21,10 +22,11 @@ Router.post('/', (req, res)=>{
                     updatedAt: new Date()
                 })
                 .then(()=>{
-                    res.redirect('/')
+                    // console.log(req.session)
+                    res.redirect('/login')
                 })
                 .catch((err)=>{
-                    res.send(err)
+                    res.send(` masuk sini ${err}`)
                 })            
             }else{
                 throw new Error(`Email already registered`)
