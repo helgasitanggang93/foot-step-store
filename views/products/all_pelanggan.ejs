@@ -16,24 +16,25 @@
 <%if(data.length === undefined || data.length === 0){%>
     
         <div class="alert alert-danger">
-           <strong>Stok Habis Semua</strong>
+           <strong>Tak ada pelanggan</strong>
        </div>
 <% } else {%>
-<h3><%=data[0].name%></h3>
-<a href="/admin/product">Back</a>
+<h3>Pelanggan Kita:</h3>
 <table>
   <tr>
-    <th>Ukuran</th>
-    <th>Warna</th>
-    <th>Stock</th>
-    <th>Action</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Gender</th>
+    <th>Phone</th>
+    <th>Address</th>
   </tr>
   <% for(let i = 0; i < data.length; i++){ %>
     <tr>
-      <td><%=data[i].size%></td>
-      <td><%=data[i].color%></td>
-      <td><%=data[i].stock%></td>
-      <td><a href="/admin/product/<%=data[i].id%>/detailUpdate">edit</a> <a href="/admin/product/<%=data[i].name%>/detail/<%=data[i].size%>">delete</a> </td>
+      <td><%=data[i].name%></td>
+      <td><%=data[i].email%></td>
+      <td><%=data[i].gender%></td>
+      <td><%=data[i].phone%></td>
+      <td><%=data[i].address%></td>
     </tr>
   <% } %>
 </table>
