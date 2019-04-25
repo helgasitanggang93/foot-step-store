@@ -13,7 +13,7 @@
         <div class="wrapper animated bounceInLeft">
             <div class="contact">
 
-            <form  action="/add_product" method="POST" enctype="multipart/form-data">
+            <form  action="/admin/product/addProduct" method="POST" enctype="multipart/form-data">
                 <div class="colsignup">
                     <h1>New Product</h1>
                     <hr>
@@ -27,10 +27,13 @@
                     <textarea rows="4" cols="50" name="description"></textarea>
 
                     <label for="pic"><b>Pic</b></label>
-                    <input type="file" name="pic" accept="image/*">
+                    <input type="file" name="picture" accept="image/*">
 
                     <label for="size"><b>Size</b></label>
                     <input type="text" placeholder="size" name="size" required>
+
+                    <label for="color"><b>Color</b></label>
+                    <input type="text" placeholder="Enter Color" name="color" required>
 
                     <label for="stock"><b>Stock</b></label>
                     <input type="text" placeholder="stock" name="stock" required>

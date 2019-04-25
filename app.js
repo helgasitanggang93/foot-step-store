@@ -23,6 +23,7 @@ app.use('/login', require('./routes/customer/login'))
 app.use('/logout', require('./routes/customer/logout'))
 app.use('/signup', require('./routes/customer/signup'))
 app.use('/admin', require('./routes/admin/admin'))
+app.use('/test', require('./routes/admin/test'))
 
 
 app.listen(PORT, ()=>{
