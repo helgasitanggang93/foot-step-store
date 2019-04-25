@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../../partials/title.ejs') %>
+    <body class="w3-content" style="max-width:1200px">
+        <%- include('../../partials/slidebar_admin.ejs') %>
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:250px">
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+    <%- include('../../partials/header.ejs') %>
+<!-- sign up form -->
+    <div class="container">
+        <div class="wrapper animated bounceInLeft">
+            <div class="contact">
+
+            <form  action="/admin/product/<%=data.id%>/detailUpdate" method="POST" enctype="multipart/form-data">
+                <div class="colsignup">
+                    <h1>Edit Product</h1>
+                    <hr>
+                    <label for="size"><b>Size</b></label>
+                    <input type="text" name="size" value="<%=data.size%>">
+
+                    <label for="color"><b>Color</b></label>
+                    <input type="text" name="color" value="<%=data.color%>" required>
+
+                    <label for="stock"><b>Stock</b></label>
+                    <input type="text" name="stock" value="<%=data.stock%>" required>
+                    
+                    <input type="submit" value="ADD PRODUCT">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('../../partials/script.ejs')%>
+    </body>
+</html>
+
