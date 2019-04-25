@@ -136,21 +136,18 @@ router.get('/:idUser/send-email', function (req, res) {
 
 // const upload = multer({ dest: './public/products/' })
 
-// router.get('/product', function (req, res) {
-//     Product.findAll()
-//     .then(function (data) {
-//         let dataProduct = data.filter((d,i) => {
-//             return data.findIndex(e => e.name === d.name) === i
-//         })
-//         res.render('./products/show_product', {data:dataProduct})
-//     })
+router.get('/product', function (req, res) {
+    Product.findAll()
+    .then(function (data) {
+        let dataProduct = data.filter((d,i) => {
+            return data.findIndex(e => e.name === d.name) === i
+        })
+        res.render('./products/show_product', {data:dataProduct})
+    })
     
-// })
+})
 
-// router.get('/product/:name/detail', function (req, res) {
-  
-
-
+router.get('/product/:name/detail', function (req, res) {
   Product.findAll({
       where : {
           name : req.params.name
@@ -159,10 +156,8 @@ router.get('/:idUser/send-email', function (req, res) {
   .then(function (data) {
     //   res.send(data)
       res.render('./products/detailProduct', {data:data})
-  })
-
-    
-// })
+  })  
+})
 
 router.get('/product/:name/detail/:size', function (req, res) {
     // res.send(req.params)
