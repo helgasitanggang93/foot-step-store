@@ -22,7 +22,6 @@
     <th>Deskripsi</th>
     <th>gambar</th>
     <th>detail</th>
-    <th>actions</th>
   </tr>
   <% for(let i = 0; i < data.length; i++){ %>
     <tr>
@@ -31,7 +30,6 @@
       <td><%=data[i].description%></td>
       <td> <img src="../products/shoes/<%=data[i].picture%>" style="width:100%">  </td>
       <td><a href="/admin/product/<%=data[i].name%>/detail">detail</a></td>
-      <td><a href="/admin/<%=data[i].name%>/editProduct">edit</a> <a href="/admin/product/<%=data[i].name%>/detail">delete</a></td>
     </tr>
   <% } %>
 </table>

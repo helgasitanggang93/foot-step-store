@@ -18,6 +18,20 @@ router.get('/', function (req, res) {
   })
 })
 
+router.get('/dataPelanggan', function (req, res) {
+    User.findAll({
+        where: {
+            role: 'customer'
+        }
+    })
+    .then(function (data) {
+        // res.send(data)
+        res.render('./products/all_pelanggan', {data})
+        
+    })
+    
+})
+
 router.get('/:id/detail', function (req, res) {
     Transaction.findOne({
         include: Product ,
@@ -136,16 +150,69 @@ router.get('/:idUser/send-email', function (req, res) {
 // router.get('/product/:name/detail', function (req, res) {
   
 
-//   Product.findAll({
-//       where : {
-//           name : req.params.name
-//       }
-//   })
-//   .then(function (data) {
-//       res.render('./products/detailProduct', {data:data})
-//   })
+
+  Product.findAll({
+      where : {
+          name : req.params.name
+      }
+  })
+  .then(function (data) {
+    //   res.send(data)
+      res.render('./products/detailProduct', {data:data})
+  })
+
     
 // })
+
+router.get('/product/:name/detail/:size', function (req, res) {
+    // res.send(req.params)
+    Product.destroy({where:req.params})
+    .then(function () {
+        res.redirect(`/admin/product/${req.params.name}/detail`)
+        
+    })
+    .catch(function (err) {
+        res.redirect('/admin')
+        
+    })
+    
+})
+
+router.get('/product/:id/detailUpdate', function (req, res) {
+    
+    Product.findOne({
+        where : {
+            id : req.params.id
+        }
+
+    })
+    .then(function (data) {
+        // res.send(data)
+        res.render('./products/edit_product', {data})
+        
+    })
+    
+})
+
+router.post('/product/:id/detailUpdate', function (req, res) {
+    
+    let dataUpdate = req.body
+    let id = req.params.id
+    Product.update(dataUpdate, {where:{id:id}})
+    .then(function () {
+        res.redirect(`/admin/product`)
+        
+    })
+    .catch(function (err) {
+        res.redirect('/admin')
+        
+    })
+    
+})
+
+
+
+
 
 
 
