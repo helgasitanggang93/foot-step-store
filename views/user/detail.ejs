@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../../partials/title.ejs') %>
+    <body class="w3-content" style="max-width:1200px">
+        <%- include('../../partials/slidebar.ejs') %>
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:250px">
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+    <%- include('../../partials/header.ejs') %>
+
+  <!-- Slideshow Header -->
+  <div class="w3-container" id="apartment">
+
+    
+  </div>
+
+  <div class="w3-container">
+    <div class="w3-row w3-large">
+      <div class="w3-col s6">
+        <!-- Slideshow Header -->
+        <h2 class="w3-text-green"><%= detailProduct[0].name %></h2>
+        <div class="w3-display-container mySlides">
+            <img src="../../products/shoes/<%= detailProduct[0].picture %>" style="width:400px;">
+        </div>
+      <div class="w3-col s6">
+                  <h4><strong>Price: <%= detailProduct[0].price %></strong></h4>
+            <hr>
+
+        </div>
+      <div class="w3-col s6" style="align:center">
+
+            <h4><strong>Color: <%= detailProduct[0].color %></strong></h4>
+            <hr>
+        </div>
+
+      </div>
+      <div class="w3-col s6">
+              <i class="fa fa-fw fa-male"></i> Footwear Size:
+                  <% if (session.loginStatus){ %>
+                  <form class="w3-container w3-card-4" action="/transaction/buy/<%= detailProduct[0].id %>">
+                    <select class="w3-select w3-border" name="size">
+                        <% detailProduct.forEach(el => { %>
+                                <option value="<%= el.size %>"><%= el.size %></option>
+                        <% }) %>
+                    </select>          
+                    <p><button class="w3-btn w3-teal">Buy</button></p>
+                </form>
+                  <% }else{ %>
+                  <form class="w3-container w3-card-4" action="/login %>">
+                    <select class="w3-select w3-border" name="size">
+                        <% detailProduct.forEach(el => { %>
+                                <option value="<%= el.size %>"><%= el.size %></option>
+                        <% }) %>
+                    </select>          
+                    <p><button class="w3-btn w3-teal">Buy</button></p>
+                </form>
+                  <% } %>
+                  
+            
+            <h4><strong>Description</strong></h4>
+            <p><%= detailProduct[0].description %></p>
+            <p>We accept: <i class="fa fa-credit-card w3-large"></i> <i class="fa fa-cc-mastercard w3-large"></i> <i class="fa fa-cc-amex w3-large"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal w3-large"></i></p>
+            <hr>
+      </div>
+    </div>
+
+
+    <%- include('../../partials/script.ejs')%>
+    </body>
+</html>

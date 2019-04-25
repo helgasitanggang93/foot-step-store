@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../../partials/title.ejs') %>
+    <body class="w3-content" style="max-width:1200px">
+        <%- include('../../partials/slidebar.ejs') %>
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:250px">
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+    <%- include('../../partials/header.ejs') %>
+
+  <!-- Slideshow Header -->
+  <div class="w3-container" id="apartment">
+
+  </div>
+
+
+
+
+    <% if (cartUser === null || cartUser === undefined  ) {%>
+            <div class="w3-display-container mySlides">
+            <img src="../../logo/sad.png" style="width:100px;">
+        </div>
+
+       <h1> Your cart is empty</h1>
+               <a href="/#products" class="w3-bar-item w3-button">Shop Now</a>
+    <% } else %>
+       <% if (cartUser.TransactionProducts === null || cartUser.TransactionProducts[0] === undefined){ %>
+            <div class="w3-display-container mySlides">
+            <img src="../../logo/sad.png" style="width:100px;">
+        </div>
+
+<h1> Your cart is empty</h1>
+              <p><a href="/#products" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
+
+        <% }else { %>
+                <table class="w3-table w3-striped w3-border">
+            <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th></th>
+            </tr>
+            <% cartUser.Products.forEach(el => { %>
+                <tr>
+                <td><%= el.name %></td>
+                <td><%= el.price %></td>
+                <td><%= el.color %></td>
+                <td><%= el.size %></td>
+                <td><a href="/transaction/cart/<%= cartUser.UserId %>/delete/<%= cartUser.TransactionProducts[0].TransactionId %>/<%= el.id %>"><i class="fa fa-trash w3-margin-right"></i></a></td>
+            </tr>
+            <% }); %>
+        </table>
+            <h1><%= subTotal(cartUser.Products) %></h1>
+            <h2><a href="/transaction/pay/<%= cartUser.TransactionProducts[0].TransactionId %>/<%= cartUser.UserId %>"> Pay </a></h2>
+               <a href="/#products" class="w3-bar-item w3-button">shopping again</a>
+
+            
+    <% } %>
+
+
+
+    <div class="w3-container">
+       
+    </div>
+
+
+    <%- include('../../partials/script.ejs')%>
+    </body>
+</html>
