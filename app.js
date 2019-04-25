@@ -25,8 +25,9 @@ app.use('/', require('./routes/customer/index'))
 app.use('/login', require('./routes/customer/login'))
 app.use('/logout', require('./routes/customer/logout'))
 app.use('/signup', require('./routes/customer/signup'))
-app.use('/admin', require('./routes/admin/admin'))
-app.use('/transaction' , require('./routes/transaction'))
+app.use('/admin', isLogin, isAdmin, require('./routes/admin/admin'))
+app.use('/addProduct', isLogin, isAdmin,require('./routes/admin/add_product'))
+app.use('/transaction' ,isLogin, require('./routes/transaction'))
 app.use('/test', require('./routes/admin/test'))
 
 

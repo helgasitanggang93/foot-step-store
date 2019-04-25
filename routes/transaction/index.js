@@ -1,5 +1,7 @@
 const Router = require('express').Router()
 const Model = require('../../models')
+const nodeMailer = require('nodemailer')
+
 
 Router.get('/buy/:productId', (req, res)=>{
     console.log(req.session.idUser,"===")
@@ -70,7 +72,7 @@ Router.get('/cart/:userId', (req, res)=>{
         }
     })
     .then((cartUser)=>{
-        // console.log(cartUser.TransactionProducts.length," ------")
+        console.log(cartUser," ------")
         // res.send(cartUser)
         res.render('./user/cart.ejs', {cartUser:cartUser})
     })
@@ -103,29 +105,53 @@ Router.get('/pay/:transactionId/:userId', (req, res)=>{
     })
     .then(()=>{
             // res.send(dataUser)
-            Model.Transaction.findOne({
-                include : [{model:Model.Product}],
-                where : {
-                    UserId: req.params.userId
-                    // id:req.params.transactionId
+            let transporter = nodeMailer.createTransport({
+                host: 'smtp.gmail.com',
+                port : 587,
+                secure : false,
+                auth: {
+                    user: 'mkh5934@gmail.com',
+                    pass: 'helgaDevelopment@123'
                 }
-            })
-            .then(function (data) {
-                res.send(data)
-                for (let i = 0; i < data.Products.length; i++) {
-                    data.Products[i].stock -= data.Products[i].TransactionProduct.amount
-                    Product.update({
-                        stock : data.Products[i].stock
-                    }, {
-                        where : {
-                            id : data.Products[i].id
-                        }
-                    })
+            });
+            let mailOptions = {
+                from: '"Foot Steep Admin" mkh5934@gmail.com', // sender address
+                to: `mkh5934@gmail.com`, // list of receivers
+                subject: 'Foot Step Nota', // Subject line
+                text: ` `, // plain text body
+                html: `<b>You have new order </b>` // html body
+            };
+            
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    res.redirect(`/admin`);
                 }
-        })
-        .catch((err)=>{
-            res.send(err)
-        })    
+                console.log('Message %s sent: %s', info.messageId, info.response);
+                })
+                res.render('./user/paid.ejs')
+            // Model.Transaction.findOne({
+            //     include : [{model:Model.Product}],
+            //     where : {
+            //         UserId: req.params.userId
+            //         // id:req.params.transactionId
+            //     }
+            // })
+            // .then(function (data) {
+            //     res.send(data)
+            //     for (let i = 0; i < data.Products.length; i++) {
+            //         data.Products[i].stock -= data.Products[i].TransactionProduct.amount
+            //         Product.update({
+            //             stock : data.Products[i].stock
+            //         }, {
+            //             where : {
+            //                 id : data.Products[i].id
+            //             }
+            //         })
+            //     }
+            // })
+            // .catch((err)=>{
+            //     res.send(err)
+            // })    
     })
     .catch((err)=>{
         res.send(err)

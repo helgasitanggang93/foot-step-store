@@ -10,7 +10,7 @@
     <!-- Push down content on small screens -->
     <div class="w3-hide-large" style="margin-top:83px"></div>
     
-        <%- include('../../partials/header.ejs') %>
+        <%- include('../../partials/header_admin.ejs') %>
 
     <!-- Area admin -->
 
@@ -23,21 +23,23 @@
     <th>phone</th>
     <th>status</th>
   </tr>
+
+
   <% for(let i = 0; i < data.length; i++){ %>
-    <tr>
-      <td><%=data[i].name%></td>
-      <td><%=data[i].email%></td>
-      <td><%=data[i].gender%></td>
-      <td><%=data[i].phone%></td>
-      <% if(data[i].Transactions[data[i].Transactions.length -1].status === 'paid'){ %>
-        <td>NO TRANSACTION</td>
-      <% } else if(data[i].Transactions[data[i].Transactions.length -1].status === 'onCart') { %>
-        <td>ON CART</td>
-        <% } else { %>
-          <td><a href="/admin/<%=data[i].id%>/detail">enroll customer</a></td>
-       <% } %>
-    </tr>
-  <% } %>
+    <% if (data[i].Transactions.length > 0 ) { %>
+        <% if(data[i].Transactions[data[i].Transactions.length -1].status === 'paid'){ %>
+
+      <tr>
+        <td><%=data[i].name%></td>
+        <td><%=data[i].email%></td>
+        <td><%=data[i].gender%></td>
+        <td><%=data[i].phone%></td>
+          <td><a href="/admin/<%=data[i].id%>/detail">Accept Order</a></td>
+      </tr>
+        <% } %>
+      
+    <% } %>
+<% } %>
 </table>
 
 

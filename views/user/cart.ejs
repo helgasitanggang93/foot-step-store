@@ -13,27 +13,22 @@
   <div class="w3-container" id="apartment">
 
   </div>
-
-
-
-
-    <% if (cartUser === null || cartUser === undefined  ) {%>
-            <div class="w3-display-container mySlides">
+<br><br><br>
+    <% if (cartUser === null || cartUser === undefined  ) { %>
+        <div class="w3-display-container mySlides">
             <img src="../../logo/sad.png" style="width:100px;">
         </div>
-
        <h1> Your cart is empty</h1>
-               <a href="/#products" class="w3-bar-item w3-button">Shop Now</a>
+        <a href="/#products" class="w3-bar-item w3-button">Shop Now</a>
     <% } else %>
        <% if (cartUser.TransactionProducts === null || cartUser.TransactionProducts[0] === undefined){ %>
             <div class="w3-display-container mySlides">
-            <img src="../../logo/sad.png" style="width:100px;">
-        </div>
+                <img src="../../logo/sad.png" style="width:100px;">
+            </div>
+            <h1> Your cart is empty</h1>
+            <p><a href="/#products" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
 
-<h1> Your cart is empty</h1>
-              <p><a href="/#products" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
-
-        <% }else { %>
+        <% } else { %>
                 <table class="w3-table w3-striped w3-border">
             <tr>
             <th>Product Name</th>
@@ -45,15 +40,20 @@
             <% cartUser.Products.forEach(el => { %>
                 <tr>
                 <td><%= el.name %></td>
-                <td><%= el.price %></td>
+                <td><%= formatRupiah(el.price) %></td>
                 <td><%= el.color %></td>
                 <td><%= el.size %></td>
                 <td><a href="/transaction/cart/<%= cartUser.UserId %>/delete/<%= cartUser.TransactionProducts[0].TransactionId %>/<%= el.id %>"><i class="fa fa-trash w3-margin-right"></i></a></td>
             </tr>
             <% }); %>
         </table>
-            <h1><%= subTotal(cartUser.Products) %></h1>
-            <h2><a href="/transaction/pay/<%= cartUser.TransactionProducts[0].TransactionId %>/<%= cartUser.UserId %>"> Pay </a></h2>
+        <br><br>
+
+            <h1>Total: <%= formatRupiah(subTotal(cartUser.Products)) %></h1>
+
+            <br><br>
+
+            <h2><a href="/transaction/pay/<%= cartUser.TransactionProducts[0].TransactionId %>/<%= cartUser.UserId %>"> Pay with credit cart  <i class="fa fa-credit-card"></i></a></h2>
                <a href="/#products" class="w3-bar-item w3-button">shopping again</a>
 
             
