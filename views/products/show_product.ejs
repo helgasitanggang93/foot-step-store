@@ -18,24 +18,20 @@
 <table>
   <tr>
     <th>Nama</th>
-    <th>Email</th>
-    <th>gender</th>
-    <th>phone</th>
-    <th>status</th>
+    <th>Harga</th>
+    <th>Deskripsi</th>
+    <th>gambar</th>
+    <th>detail</th>
+    <th>actions</th>
   </tr>
   <% for(let i = 0; i < data.length; i++){ %>
     <tr>
       <td><%=data[i].name%></td>
-      <td><%=data[i].email%></td>
-      <td><%=data[i].gender%></td>
-      <td><%=data[i].phone%></td>
-      <% if(data[i].Transactions[data[i].Transactions.length -1].status === 'paid'){ %>
-        <td>NO TRANSACTION</td>
-      <% } else if(data[i].Transactions[data[i].Transactions.length -1].status === 'onCart') { %>
-        <td>ON CART</td>
-        <% } else { %>
-          <td><a href="/admin/<%=data[i].id%>/detail">enroll customer</a></td>
-       <% } %>
+      <td><%=data[i].price%></td>
+      <td><%=data[i].description%></td>
+      <td> <img src="../products/shoes/<%=data[i].picture%>" style="width:100%">  </td>
+      <td><a href="/admin/product/<%=data[i].name%>/detail">detail</a></td>
+      <td><a href="/admin/<%=data[i].name%>/editProduct">edit</a> <a href="/admin/product/<%=data[i].name%>/detail">delete</a></td>
     </tr>
   <% } %>
 </table>

@@ -14,28 +14,21 @@
 
     <!-- Area admin -->
 
-
+<h3><%=data[0].name%></h3>
+<a href="/admin/product">Back</a>
 <table>
   <tr>
     <th>Nama</th>
-    <th>Email</th>
-    <th>gender</th>
-    <th>phone</th>
-    <th>status</th>
+    <th>Harga</th>
+    <th>Deskripsi</th>
+    <th>Action</th>
   </tr>
   <% for(let i = 0; i < data.length; i++){ %>
     <tr>
-      <td><%=data[i].name%></td>
-      <td><%=data[i].email%></td>
-      <td><%=data[i].gender%></td>
-      <td><%=data[i].phone%></td>
-      <% if(data[i].Transactions[data[i].Transactions.length -1].status === 'paid'){ %>
-        <td>NO TRANSACTION</td>
-      <% } else if(data[i].Transactions[data[i].Transactions.length -1].status === 'onCart') { %>
-        <td>ON CART</td>
-        <% } else { %>
-          <td><a href="/admin/<%=data[i].id%>/detail">enroll customer</a></td>
-       <% } %>
+      <td><%=data[i].size%></td>
+      <td><%=data[i].color%></td>
+      <td><%=data[i].stock%></td>
+      <td><a href="/admin/product/<%=data[i].name%>/detail">edit</a> <a href="/admin/product/<%=data[i].name%>/detail">delete</a> </td>
     </tr>
   <% } %>
 </table>

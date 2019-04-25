@@ -16,6 +16,11 @@
 
 <h4>User Id: <%=data.UserId%></h4>
 <a href="/admin">Back</a>
+<% if(err){ %>
+  <div class="alert alert-danger">
+     <strong><%=err%></strong>
+ </div>
+<% } %>
 <table>
   <tr>
     <th>Product</th>
@@ -24,7 +29,6 @@
     <th>Price</th>
     <th>Amount</th>
     <th>Sub Total</th>
-    <th>ship</th>
   </tr>
   <% for(let i = 0; i < data.Products.length; i++){ %>
     <tr>
@@ -34,11 +38,11 @@
       <td><%=data.Products[i].price%></td>
       <td><%=data.Products[i].TransactionProduct.amount%></td>
       <td>Rp.<%=total(data.Products[i].TransactionProduct.amount,data.Products[i].price)%></td>
-      <td><a href="/admin">Ship</a></td>
     </tr>
-  <% } %>
-</table>
-
+    <% } %>
+  </table>
+  <h3><a href="/admin/<%=data.UserId%>/send-email">Ship</a></h3>
+  
 <h3>TOTAL <%=hasil%></h3>
 
 
