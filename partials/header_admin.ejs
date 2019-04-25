@@ -3,15 +3,11 @@
     <% if (session.loginStatus){ %>
       <p class="w3-left">Welcome <%= session.custName %> | <a href="/logout">Logout</a></p>
     <p class="w3-right">
-      <a href="/transaction/cart/<%= session.idUser %>"><i class="fa fa-shopping-cart w3-margin-right"></i></a>
-      <i class="fa fa-search"></i>
     </p>
 
 <% }else{ %>
       <p class="w3-left"><a href="/login">Login</a> | <a href="/signup">Sign Up</a> </p>
     <p class="w3-right">
-      <a href="/login"><i class="fa fa-shopping-cart w3-margin-right"></i></a>
-      <i class="fa fa-search"></i>
     </p>
 <% } %>
   </header>

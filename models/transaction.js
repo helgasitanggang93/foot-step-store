@@ -9,9 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         user.status = 'onCart'
       }
     }
-  });
 
-
+  }); 
   Transaction.associate = function(models) {
     // associations can be defined here
     Transaction.belongsTo(models.User, {foreignKey: 'UserId'})

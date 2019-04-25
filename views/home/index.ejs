@@ -27,7 +27,7 @@
                                             <a href="/product/detail/<%= el.id %>"> <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> </a>
                                         </div>
                                     </div>
-                                    <p><%= el.name %><br><b><%= el.price %></b></p>
+                                    <p><%= el.name %><br><b><%= formatRupiah(el.price) %></b></p>
                                 </div>
                             </div>
                         <% }); %>
