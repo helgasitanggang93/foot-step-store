@@ -4,12 +4,22 @@ const salt = bcrypt.genSaltSync(10);
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate:{
+        isEmail:{
+          args:true,
+          msg:`Email Address in invalid format`
+        },
+      }
+    },
     password: DataTypes.STRING,
     gender: DataTypes.STRING,
     phone: DataTypes.STRING,
-    address: DataTypes.STRING,
+    address: DataTypes.TEXT,
     role:DataTypes.STRING
   }, {
     hooks:{

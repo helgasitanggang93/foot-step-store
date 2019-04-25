@@ -8,6 +8,9 @@ const isLogin = require('./middlewares/isLogin')
 const isAdmin = require('./middlewares/isAdmin')
 let sess = { secret:'mySecret'}
 app.locals.total = require('./helper/totalPrice')
+app.locals.subTotal = require('./helper/totalAll')
+app.locals.formatRupiah = require('./helper/formatRupiah')
+
 app.use(session(sess))
 app.use((req,res,next)=>{
     app.locals.session = req.session
@@ -23,6 +26,8 @@ app.use('/login', require('./routes/customer/login'))
 app.use('/logout', require('./routes/customer/logout'))
 app.use('/signup', require('./routes/customer/signup'))
 app.use('/admin', require('./routes/admin/admin'))
+app.use('/transaction' , require('./routes/transaction'))
+
 
 
 app.listen(PORT, ()=>{

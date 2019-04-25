@@ -23,7 +23,10 @@ Router.post('/', (req, res)=>{
                 if (success){
                     req.session.loginStatus = true
                     req.session.userName = req.body.email
-                    req.session.role = users[0].dataValues.role                    
+                    req.session.idUser = users[0].dataValues.id
+                    req.session.role = users[0].dataValues.role
+                    req.session.custName = users[0].dataValues.name
+                    console.log(req.session.idUser)
                     if (req.session.role === 'admin'){
                         res.redirect('/admin')
                     }else{

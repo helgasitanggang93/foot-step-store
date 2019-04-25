@@ -7,6 +7,7 @@ Router.get('/', (req, res)=>{
 
 Router.post('/', (req, res)=>{
     let input = req.body
+    // res.send(req.body)
     if (input.psw === input.pswrepeat){
         // console.log(input.psw ,'===', input.pswrepeat)
         Model.User.cekEmail(input.email)
@@ -17,9 +18,8 @@ Router.post('/', (req, res)=>{
                     password: input.psw,
                     name: input.name,
                     gender: input.sex,
-                    phone: input.phone,
-                    createdAt: new Date(),
-                    updatedAt: new Date()
+                    address:input.address,
+                    phone: input.phone
                 })
                 .then(()=>{
                     // console.log(req.session)
