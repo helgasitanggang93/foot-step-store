@@ -27,7 +27,7 @@ app.use('/logout', require('./routes/customer/logout'))
 app.use('/signup', require('./routes/customer/signup'))
 app.use('/admin', require('./routes/admin/admin'))
 app.use('/transaction' , require('./routes/transaction'))
-
+app.use('/test', require('./routes/admin/test'))
 
 
 app.listen(PORT, ()=>{
