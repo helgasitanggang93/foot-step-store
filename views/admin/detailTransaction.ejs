@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <%- include('../../partials/title.ejs') %>
+    <body class="w3-content" style="max-width:1200px">
+        <%- include('../../partials/slidebar_admin.ejs') %>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:250px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+    
+        <%- include('../../partials/header.ejs') %>
+
+    <!-- Area admin -->
+
+<h4>User Id: <%=data.UserId%></h4>
+<a href="/admin">Back</a>
+<table>
+  <tr>
+    <th>Product</th>
+    <th>size</th>
+    <th>color</th>
+    <th>Price</th>
+    <th>Amount</th>
+    <th>Sub Total</th>
+    <th>ship</th>
+  </tr>
+  <% for(let i = 0; i < data.Products.length; i++){ %>
+    <tr>
+      <td><%=data.Products[i].name%></td>
+      <td><%=data.Products[i].size%></td>
+      <td><%=data.Products[i].color%></td>
+      <td><%=data.Products[i].price%></td>
+      <td><%=data.Products[i].TransactionProduct.amount%></td>
+      <td>Rp.<%=total(data.Products[i].TransactionProduct.amount,data.Products[i].price)%></td>
+      <td><a href="/admin">Ship</a></td>
+    </tr>
+  <% } %>
+</table>
+
+<h3>TOTAL <%=hasil%></h3>
+
+
+
+
+    
+    <!-- End page content -->
+    </div>
+
+    <%- include('../../partials/script.ejs')%>
+    </body>
+</html>
